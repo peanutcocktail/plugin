@@ -1,6 +1,6 @@
 module.exports = {
   menu: async (kernel, info) => {
-    console.log("cwd", info.cwd())
+    console.log("info.cwd", info.cwd())
     return [
       {
         text: "Dev",
