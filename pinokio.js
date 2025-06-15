@@ -1,6 +1,5 @@
 module.exports = {
   menu: async (kernel, info) => {
-    console.log("info.cwd", info.cwd())
     return [
       {
         text: "Dev",
@@ -43,6 +42,14 @@ module.exports = {
             run: {
               message: "windsurf .",
               path: info.cwd()
+            }
+          },
+          {
+            icon: "fa-solid fa-rotate",
+            text: "Update",
+            shell: {
+              message: "git pull",
+              path: kernel.path("plugin")
             }
           }
         ],
