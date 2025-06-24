@@ -2,35 +2,49 @@ const path = require('path')
 module.exports = {
   menu: async (kernel, info) => {
     let venvs = await info.venv()
-    let terminals = [{
-      shell: {
-        input: true
+    let terminal
+
+    if (venvs.length > 0) {
+      terminal = {
+        icon: "fa-solid fa-terminal",
+        text: "Terminal",
+        shell: {
+          input: true
+        }
       }
-    }]
-    try {
-      for(let venv of venvs) {
-        let parsed = path.parse(venv)
-        terminals.push({
-          text: parsed.name,
-          shell: {
-            venv: venv,
-            input: true,
-          }
-        })
+    } else {
+      let terminals = [{
+        text: "No venv",
+        shell: {
+          input: true
+        }
+      }]
+      try {
+        for(let venv of venvs) {
+          let parsed = path.parse(venv)
+          terminals.push({
+            text: parsed.name,
+            shell: {
+              venv: venv,
+              input: true,
+            }
+          })
+        }
+      } catch (e) {
+        console.log(e)
       }
-    } catch (e) {
-      console.log(e)
+      terminal = {
+        icon: "fa-solid fa-terminal",
+        text: "Terminal",
+        menu: terminals
+      }
     }
     return [
       {
         text: "Dev",
         icon: "fa-solid fa-code",
         menu: [
-          {
-            icon: "fa-solid fa-terminal",
-            text: "Terminal",
-            menu: terminals
-          },
+          terminal,
           {
             image: "/asset/plugin/dev/claude.png",
             text: "Claude Code",
