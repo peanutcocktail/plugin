@@ -1,5 +1,22 @@
+const path = require('path')
 module.exports = {
   menu: async (kernel, info) => {
+    let venvs = info.venvs()
+    let terminals = [{
+      shell: {
+        input: true
+      }
+    }]
+    for(let venv of venvs) {
+      let parsed = path.parse(venv)
+      terminals.push({
+        text: parsed.name,
+        shell: {
+          venv: venv,
+          input: true,
+        }
+      })
+    }
     return [
       {
         text: "Dev",
@@ -8,9 +25,7 @@ module.exports = {
           {
             icon: "fa-solid fa-terminal",
             text: "Terminal",
-            shell: {
-              input: true
-            },
+            menu: terminals
           },
           {
             image: "/asset/plugin/dev/claude.png",
