@@ -5,14 +5,6 @@ module.exports = {
     let terminal
 
     if (venvs.length > 0) {
-      terminal = {
-        icon: "fa-solid fa-terminal",
-        text: "Terminal",
-        shell: {
-          input: true
-        }
-      }
-    } else {
       let terminals = [{
         text: "No venv",
         shell: {
@@ -37,6 +29,14 @@ module.exports = {
         icon: "fa-solid fa-terminal",
         text: "Terminal",
         menu: terminals
+      }
+    } else {
+      terminal = {
+        icon: "fa-solid fa-terminal",
+        text: "Terminal",
+        shell: {
+          input: true
+        }
       }
     }
     return [
