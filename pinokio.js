@@ -1,7 +1,7 @@
 const path = require('path')
 module.exports = {
   menu: async (kernel, info) => {
-    let venvs = info.venvs()
+    let venvs = info.venv()
     let terminals = [{
       shell: {
         input: true
