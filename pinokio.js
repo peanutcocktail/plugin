@@ -5,17 +5,20 @@ module.exports = {
     let terminal
 
     if (venvs.length > 0) {
-      let terminals = [{
-        text: "No venv",
-        shell: {
-          input: true
-        }
-      }]
+      let terminals = []
+//      let terminals = [{
+//        icon: "fa-solid fa-terminal",
+//        text: "No venv",
+//        shell: {
+//          input: true
+//        }
+//      }]
       try {
         for(let venv of venvs) {
           let parsed = path.parse(venv)
           terminals.push({
-            text: parsed.name,
+            icon: "fa-brands fa-python",
+            text: "[venv] " + parsed.name,
             shell: {
               venv: venv,
               input: true,
