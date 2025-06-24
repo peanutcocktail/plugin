@@ -1,21 +1,25 @@
 const path = require('path')
 module.exports = {
   menu: async (kernel, info) => {
-    let venvs = info.venv()
+    let venvs = await info.venv()
     let terminals = [{
       shell: {
         input: true
       }
     }]
-    for(let venv of venvs) {
-      let parsed = path.parse(venv)
-      terminals.push({
-        text: parsed.name,
-        shell: {
-          venv: venv,
-          input: true,
-        }
-      })
+    try {
+      for(let venv of venvs) {
+        let parsed = path.parse(venv)
+        terminals.push({
+          text: parsed.name,
+          shell: {
+            venv: venv,
+            input: true,
+          }
+        })
+      }
+    } catch (e) {
+      console.log(e)
     }
     return [
       {
